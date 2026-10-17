@@ -1,0 +1,13 @@
+{
+  "name": "ivoke · Image-first words",
+  "short_name": "ivoke",
+  "description": "See a word before you translate it.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f0f7f4",
+  "theme_color": "#f0f7f4",
+  "icons": [
+    { "src": "/assets/logo-desktop.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
