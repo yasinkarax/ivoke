@@ -60,7 +60,8 @@ h1,h2,p{margin:0}
 .primary-button:hover{background:#066b65;transform:translateY(-1px)}
 .translation-caption{text-align:center;color:var(--color-muted);font-size:10px}
 .translation-reveal{background:var(--color-soft);border-radius:18px;padding:15px 18px;display:flex;flex-direction:column;gap:4px;animation:reveal .22s ease-out}
-.translation-reveal>span{font-size:10px;font-weight:600;color:var(--color-accent)}
+.translation-reveal>span{font-size:10px;font-weight:600;text-transform:uppercase;color:var(--color-accent)}
+.desktop-word-title[dir="rtl"],.word-title-row h2[dir="rtl"]{letter-spacing:normal}
 .translation-reveal strong{font:400 28px Inter,Arial,sans-serif;color:var(--color-ink)}
 .translation-reveal button{align-self:flex-start;border:0;background:none;color:var(--color-accent);padding:4px 0 0;font-size:11px;font-weight:600}
 @keyframes reveal{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}

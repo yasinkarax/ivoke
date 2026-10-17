@@ -1,25 +1,61 @@
 # ivoke
 
-An image-first English-to-Spanish word learning prototype based on the supplied Figma design. The mint and teal interface uses a thought-cloud logo to reflect imagining a word's meaning before revealing its translation. The phone layout is the primary experience; the same React app expands into a desktop workspace in a browser. Phones use Home and Mind navigation, and Inter is bundled throughout the app through Fontsource. Daily goal tracking has been removed.
+**Imagine the meaning. Then reveal the translation.**
 
-## Run it
+ivoke is a vocabulary learning app intended for people learning any language. It shows a picture of a word's meaning first, giving the learner time to form a mental image and make their own connection. The translated text appears only when the learner asks for it.
+
+The primary experience is on mobile, with a responsive browser layout. The interface follows the supplied Figma design, using mint and teal colors, Inter typography, and a thought-cloud logo.
+
+## Learning flow
+
+1. **Enter a word.** A matching picture appears automatically.
+2. **Imagine its meaning.** Open the picture, study it, and make the connection before reading translated text. Pronunciation is available through the speaker button.
+3. **Reveal when ready.** Press **Show translation** to see the meaning in the translation language. Each newly opened word starts with its translation hidden.
+4. **Keep the connection.** Bookmark the word to revisit it in **Mind**.
+
+The interface has no language-pair selector or daily goal counter.
+
+## Current prototype
+
+The product's scope is learning across all languages. This local prototype demonstrates the experience with **five pictured concepts in 12 languages**; full language coverage is still to be implemented.
+
+The concepts are **cloud**, **apricot**, **ripple**, **bloom** (the verb), and **pebble**. Their demo vocabulary spans multiple languages and writing systems. The current demo language catalog is defined in `src/languages.ts`.
+
+- **Automatic recognition:** entering a known sample word opens its underlying pictured concept. Words with the same meaning share the same image across languages.
+- **Translation language:** the app uses the first supported language in the browser's language preferences, or the prototype's default fallback when none matches. If the entered word is already in that language, revealing it shows the same term.
+- **Pronunciation and scripts:** speech uses the recognized source language. Vocabulary text supports left-to-right and right-to-left writing systems. Interface localization remains future work.
+- **Collection:** four concepts start saved; cloud can be added with its bookmark. Saved concepts remain in this browser's local storage. Memory filters work on both layouts, and desktop also has collection search.
+
+On mobile, tap a picture preview or press Enter to open a lesson. The sample cloud card also opens a lesson. On desktop, the lesson image updates as you type.
+
+## Run locally
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite. `npm run build` checks the TypeScript code and creates a production build in `dist/`. The manifest lets compatible mobile browsers add the app to the home screen. Hosting the production build over HTTPS is required for that outside localhost.
+Open the local URL printed by Vite.
 
-## Current learning flow
+```bash
+npm run build
+npm run preview
+```
 
-1. Enter **cloud**, **apricot**, **ripple**, **bloom**, or **pebble**. On a phone, a picture preview appears as soon as the entry matches a pictured word. Tap it or press Enter to open the lesson. The sample cloud card also opens the cloud lesson, whose Spanish translation is **nube**. On desktop, the full image updates as you type.
-2. Study the image and English word. The speaker button uses the browser's speech synthesis for pronunciation.
-3. Tap **Show translation** to reveal the Spanish word. The translation starts hidden each time a word is opened.
-4. Save or remove words with the bookmark button. Mind starts with **apricot**, **ripple**, **bloom**, and **pebble** saved; cloud can be added from its lesson. Filters work on phone and desktop, and the desktop collection also has search. Saved words are stored in this browser's local storage.
+`build` checks TypeScript and generates the production app in `dist/`. `preview` serves that build locally. The web app manifest allows installation in compatible browsers; outside localhost, this requires HTTPS.
 
-The pictured-word images, thought-cloud logo, and UI icons come from the Figma design and are stored in `public/assets`.
+## Project structure
 
-## Current limits
+- `src/App.tsx` — word entry, image previews, lessons, translation reveal, and collection.
+- `src/words.ts` — shared pictured concepts, localized vocabulary, and sample-word recognition.
+- `src/languages.ts` — demo languages, speech tags, text directions, and device-language selection.
+- `src/styles.css` — responsive layouts, typography, and color tokens.
+- `public/assets` — local images, logo, and icons from the Figma design.
 
-This version uses five curated word/image/translation entries. It does not translate arbitrary text or generate images. Adding that requires a translation source, an image source, and a small service layer to protect API keys and handle errors. The Growing and Rooted labels are sample content from the design, not a tested recall score. Pronunciation voices depend on the device and browser.
+The app uses React, TypeScript, and Vite. Inter is bundled through Fontsource.
+
+## What remains for full language coverage
+
+Arbitrary words, broader language coverage, and dynamic image retrieval require live translation and image services. Those services are not connected yet. A service layer will also be needed to keep API keys private and handle failed requests.
+
+Current language recognition looks up the curated vocabulary, so shared spellings can be ambiguous. Pronunciation depends on voices available in the browser. **Growing** and **Rooted** are sample collection labels, not measured recall scores.
